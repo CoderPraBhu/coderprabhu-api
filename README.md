@@ -5,7 +5,7 @@ This Repo for API: https://github.com/CoderPraBhu/coderprabhu-api
 Git Repo for K8S: https://github.com/CoderPraBhu/coderprabhu-k8s  
 
 Commands:  
-The app was created using Spring Initializr: 
+The app was created using Spring Initializr.   
 
 After making any changes, update following command with new version number.
 Execute to build the image and push it:  

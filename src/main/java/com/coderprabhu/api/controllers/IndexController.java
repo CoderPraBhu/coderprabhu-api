@@ -1,5 +1,9 @@
 package com.coderprabhu.api.controllers;
 
+import com.coderprabhu.api.counter.Counter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,9 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-    @GetMapping(value="/")
+    @Autowired Counter counter;
+
+    @GetMapping(value="/hello")
+    @CrossOrigin(origins = "*")
     public String home() {
-        return "Hello from CoderPraBhu Api";
+        counter.increament();
+        return "Hello from CoderPraBhu!";
     }
-    
+
+    @GetMapping(value="/count")
+    @CrossOrigin(origins = "*")
+    public int count() {
+        return counter.getCount();
+    }
 }

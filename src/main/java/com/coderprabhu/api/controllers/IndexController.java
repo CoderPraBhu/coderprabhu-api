@@ -15,9 +15,15 @@ public class IndexController {
 
     @Autowired Counter counter;
 
-    @GetMapping(value="/hello")
+    @GetMapping(value="/")
     @CrossOrigin(origins = "*")
     public String home() {
+        return "Home";
+    }
+
+    @GetMapping(value="/hello")
+    @CrossOrigin(origins = "*")
+    public String hello() {
         counter.increament();
         return "Hello from CoderPraBhu!";
     }

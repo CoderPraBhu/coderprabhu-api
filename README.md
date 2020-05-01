@@ -13,8 +13,8 @@ Execute to build the image and push it:
 gradle jibDockerBuild --image=gcr.io/kubegcp-256806/coderprabhu-api:v4
 docker push gcr.io/kubegcp-256806/coderprabhu-api:v4
 ````
-Reference: https://spring.io/guides/topicals/spring-boot-docker/
-Authentication: 
+Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
+Google Container registry authentication: 
 https://cloud.google.com/container-registry/docs/advanced-authentication
 ```
 gcloud auth login

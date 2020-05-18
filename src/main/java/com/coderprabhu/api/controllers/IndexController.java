@@ -25,7 +25,7 @@ public class IndexController {
     @CrossOrigin(origins = "*")
     public String hello() {
         counter.increament();
-        return "Hello from CoderPraBhu!";
+        return "Hello!";
     }
 
     @GetMapping(value="/count")

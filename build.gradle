@@ -1,13 +1,13 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'com.google.cloud.tools.jib' version '2.2.0'
+	id 'com.google.cloud.tools.jib' version '2.3.0'
 	id 'java'
 }
 
 group = 'com.coderprabhu'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 configurations {
 	developmentOnly
@@ -21,15 +21,22 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+  set('wavefrontVersion', "2.0.0-RC1")
 }
 
 dependencies {
+//	implementation 'com.wavefront:wavefront-spring-boot-starter'
+//	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.2.2.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	//implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -37,6 +44,43 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
+dependencyManagement {
+  imports {
+    mavenBom "com.wavefront:wavefront-spring-boot-bom:${wavefrontVersion}"
+  }
+}
+
 test {
 	useJUnitPlatform()
+}
+
+jib {
+//   from {
+//     image = 'openjdk:alpine'
+//   }
+//   to {
+//     image = 'localhost:5000/my-image/built-with-jib'
+//     credHelper = 'osxkeychain'
+//     tags = ['tag2', 'latest']
+//   }
+  container {
+    // jvmFlags = ['-Xms100m', '÷-Xmx120m']
+    jvmFlags = ['-XX:MaxRAMPercentage=75.0','-XX:+UseSerialGC','-Xss512k']
+    // jvmFlags = ['-Xms512m', '-Xdebug', '-Xmy:flag=jib-rules']
+    // mainClass = 'mypackage.MyApp'
+    // args = ['some', 'args']
+    // ports = ['1000', '2000-2003/udp']k
+    // labels = [key1:'value1', key2:'value2']
+    // format = 'OCI'
+  }
+}
+
+bootRun {
+    if (project.hasProperty('args')) {
+        args project.args.split(',')
+    }
+}
+
+bootBuildImage {
+	imageName = "gcr.io/kubegcp-256806/coderprabhu-api:${project.version}"
 }

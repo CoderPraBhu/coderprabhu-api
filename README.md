@@ -10,8 +10,8 @@ The app was created using Spring Initializr.
 After making any changes, update following command with new version number.
 Execute to build the image and push it:  
 ```
-./gradlew jibDockerBuild --image=gcr.io/kubegcp-256806/coderprabhu-api:v22
-docker push gcr.io/kubegcp-256806/coderprabhu-api:v22
+./gradlew jibDockerBuild --image=gcr.io/kubegcp-256806/coderprabhu-api:v23
+docker push gcr.io/kubegcp-256806/coderprabhu-api:v23
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml 
 ```
 ## Spring boot image build:
@@ -19,7 +19,7 @@ After making any changes, choose version in build.gradle, update docker push com
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.3-SNAPSHOT
+docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.5-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
@@ -34,9 +34,12 @@ You can run the image locally using
 ````
 docker run -p 8080:8080 -t gcr.io/kubegcp-256806/coderprabhu-api:v9 
 curl http://localhost:8080
-docker run -p 8080:8080 -t gcr.io/kubegcp-256806/coderprabhu-api:latest
+docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.5-SNAPSHOT 
 ./gradlew bootRun
 ./gradlew bootRun -Pargs=--logging.level.org.springframework=DEBUG   
+./gradlew bootRun --args='--spring.profiles.active=dev'
+./gradlew bootRun --args='--spring.profiles.active=prod'
+
 ````
 To update the k8s deployment with new version, update the api deployment yaml with new 
 container image version and execute

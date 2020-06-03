@@ -1,5 +1,9 @@
 package com.coderprabhu.api.data;
 
+import java.time.ZonedDateTime;
+
+import org.springframework.data.annotation.Id;
+
 import lombok.Data;
 
 /**
@@ -8,9 +12,9 @@ import lombok.Data;
 @Data
 public class Visitor {
 
-    //@Id
+    @Id
     String id;
-
     String ip;
     String device;
+    ZonedDateTime zonedDateTime;
 }

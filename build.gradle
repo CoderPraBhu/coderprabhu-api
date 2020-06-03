@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.coderprabhu'
-version = '0.0.3-SNAPSHOT'
+version = '0.0.5-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
@@ -32,10 +32,10 @@ dependencies {
 //	implementation 'com.wavefront:wavefront-spring-boot-starter'
 //	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.2.2.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-//	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.github.ua-parser:uap-java:1.4.0'
+	implementation 'com.github.ua-parser:uap-java:1.4.0'	
 	compileOnly 'org.projectlombok:lombok'
 //	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'

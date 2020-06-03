@@ -18,6 +18,5 @@ public class CoderprabhuApiApplication {
 	@Bean
     public Parser uaParser() throws IOException {
         return new Parser();
-    }
-
+	}
 }

@@ -1,10 +1,14 @@
 
 package com.coderprabhu.api.services;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.coderprabhu.api.dao.VisitorRepository;
 import com.coderprabhu.api.data.Visitor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,8 @@ public class VisitorService {
 
     @Autowired Parser parser;
 
+    @Autowired VisitorRepository repository;
+
     public Visitor processVisit(HttpServletRequest request) {
         String ip = extractIp(request);
         String deviceDetails = getDeviceDetails(request.getHeader("user-agent"));
@@ -32,8 +38,17 @@ public class VisitorService {
         Visitor visitor = new Visitor();
         visitor.setDevice(deviceDetails);
         visitor.setIp(ip);
-        log.info("New visit to site from " + visitorDetail);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of("America/Los_Angeles"));
+        visitor.setZonedDateTime(zonedDateTime);
+        log.info("New visit from " + visitorDetail + "at : " + zonedDateTime.toString());
+        Visitor visit = repository.save(visitor);
+        log.info("Visit recorded " + visit.getId() + "at : " + visit.getZonedDateTime());
 		return visitor;
+    }
+    
+    public Integer getTotalVisits() {
+		return repository.findAll().size();
 	}
 
     private String extractIp(HttpServletRequest request) {
@@ -50,13 +65,11 @@ public class VisitorService {
 
     private String getDeviceDetails(String userAgent) {
         String deviceDetails = UNKNOWN;
-
         Client client = parser.parse(userAgent);
         if (Objects.nonNull(client)) {
             deviceDetails = client.userAgent.family + " " + client.userAgent.major + "." + client.userAgent.minor +
                     " - " + client.os.family + " " + client.os.major + "." + client.os.minor;
         }
-
         return deviceDetails;
     }
 

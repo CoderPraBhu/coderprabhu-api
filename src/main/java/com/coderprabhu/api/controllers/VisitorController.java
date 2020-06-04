@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j2;
 
 /**
- * IndexController
+ * VisitorController
  */
 @RestController
 @Log4j2
@@ -33,5 +33,13 @@ public class VisitorController {
         Integer totalVisits = visitorService.getTotalVisits();
         log.info("Total visitors so far: " + totalVisits);
         return totalVisits;
+    }
+
+    @GetMapping(value="/unique")
+    @CrossOrigin(origins = "*")
+    public int unique() {
+        Integer uniqueVisits = visitorService.getUniqueVisits();
+        log.info("Total visitors so far: " + uniqueVisits);
+        return uniqueVisits;
     }
 }

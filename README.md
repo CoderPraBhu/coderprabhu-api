@@ -19,7 +19,7 @@ After making any changes, choose version in build.gradle, update docker push com
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.5-SNAPSHOT
+docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  

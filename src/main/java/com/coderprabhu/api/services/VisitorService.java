@@ -9,6 +9,7 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 
 import com.coderprabhu.api.dao.VisitorRepository;
+import com.coderprabhu.api.dao.VisitorTemplate;
 import com.coderprabhu.api.data.Visitor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class VisitorService {
 
     @Autowired VisitorRepository repository;
 
+    @Autowired VisitorTemplate visitorTemplate;
+
     public Visitor processVisit(HttpServletRequest request) {
         String ip = extractIp(request);
         String deviceDetails = getDeviceDetails(request.getHeader("user-agent"));
@@ -49,6 +52,12 @@ public class VisitorService {
     
     public Integer getTotalVisits() {
 		return repository.findAll().size();
+    }
+    
+    public Integer getUniqueVisits() {
+        Integer uniqueVisits = visitorTemplate.getUniqueVisits();
+        log.info("UniqueVisits: " + uniqueVisits);
+		return uniqueVisits;
 	}
 
     private String extractIp(HttpServletRequest request) {
@@ -76,4 +85,5 @@ public class VisitorService {
     private String parseXForwardedHeader(String header) {
         return header.split(" *, *")[0];
     }
+
 }

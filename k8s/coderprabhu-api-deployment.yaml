@@ -44,7 +44,7 @@ spec:
                 -Xlog:gc
                 -Xms110m
                 -Xmx140m
-                -XX:MaxRAM=400M
+                -XX:MaxRAM=180M
                 -XX:+PrintFlagsFinal
         livenessProbe:
           httpGet:

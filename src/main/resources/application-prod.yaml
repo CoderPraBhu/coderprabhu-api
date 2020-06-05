@@ -2,8 +2,10 @@ server:
   port: 8080
   tomcat:
     threads:
-      max: 5
+      max: 2
 spring:
   data:
     mongodb:
       uri: mongodb://mongo-0.mongo/CoderPraBhuApi
+  main:
+    banner-mode: "off"

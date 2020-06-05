@@ -2,7 +2,7 @@ server:
   port: 8080
   tomcat:
     threads:
-      max: 5
+      max: 2
 # management:
 #   endpoints:
 #     web:

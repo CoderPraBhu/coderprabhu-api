@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: coderprabhu-api-app
-        image: gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT
+        image: gcr.io/kubegcp-256806/coderprabhu-api:0.0.9-SNAPSHOT
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -31,6 +31,19 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "prod"    
+        - name: BPL_JVM_HEAD_ROOM
+          value: "2"  
+        - name: BPL_JVM_LOADED_CLASS_COUNT
+          value: "35"  
+        - name: BPL_JVM_THREAD_COUNT
+          value: "10"  
+        - name: JAVA_OPTS
+          value: >-
+                -XX:ReservedCodeCacheSize=90M
+                -XX:MaxMetaspaceSize=60M
+                -Xlog:gc
+                -Xms120m
+                -Xmx130m
         livenessProbe:
           httpGet:
             port: 8080

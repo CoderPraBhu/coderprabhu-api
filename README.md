@@ -19,7 +19,7 @@ After making any changes, choose version in build.gradle, update docker push com
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT
+docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.9-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
@@ -34,7 +34,9 @@ You can run the image locally using
 ````
 docker run -p 8080:8080 -t gcr.io/kubegcp-256806/coderprabhu-api:v9 
 curl http://localhost:8080
-docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.5-SNAPSHOT 
+docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
+docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -e "BPL_JVM_THREAD_COUNT=20" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
+
 ./gradlew bootRun
 ./gradlew bootRun -Pargs=--logging.level.org.springframework=DEBUG   
 ./gradlew bootRun --args='--spring.profiles.active=dev'
@@ -66,4 +68,5 @@ curl http://localhost:8080/actuator/metrics
 # more commands:   
 ````
 kubectl exec -it coderprabhu-api-app-5f98db757b-xt9cv -c coderprabhu-api-app bash
+watch 'kubectl get pods|grep coderprabhu-api & kubectl top pods|grep coderprabhu-api' 
 ````   

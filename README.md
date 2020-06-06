@@ -68,6 +68,6 @@ curl http://localhost:8080/actuator/metrics
 # more commands:   
 ````
 kubectl exec -it coderprabhu-api-app-ddccf8c96-4789n -c coderprabhu-api-app bash
-
 watch 'kubectl get pods|grep coderprabhu-api & kubectl top pods|grep coderprabhu-api' 
+watch 'kubectl logs coderprabhu-api-app-7cb66dd46b-4jfn4 --tail=150 | grep GC |grep heap'
 ````   

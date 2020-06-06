@@ -27,7 +27,7 @@ spec:
             memory: "64Mi"
           limits:
             cpu: "0.3"  
-            memory: "180Mi" 
+            memory: "190Mi" 
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "prod"    
@@ -39,12 +39,12 @@ spec:
           value: "10"  
         - name: JAVA_OPTS
           value: >-
-                -XX:ReservedCodeCacheSize=80M
+                -XX:ReservedCodeCacheSize=60M
                 -XX:MaxMetaspaceSize=60M
-                -Xlog:gc
-                -Xms110m
-                -Xmx140m
-                -XX:MaxRAM=180M
+                -Xlog:gc*=debug
+                -Xms30m
+                -Xmx40m
+                -XX:MaxRAM=170M
                 -XX:+PrintFlagsFinal
         livenessProbe:
           httpGet:

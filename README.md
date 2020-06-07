@@ -67,7 +67,12 @@ curl http://localhost:8080/actuator/metrics
 ````   
 # more commands:   
 ````
-kubectl exec -it coderprabhu-api-app-ddccf8c96-4789n -c coderprabhu-api-app bash
+kubectl exec -it coderprabhu-api-app-6f458c588-tw929 -c coderprabhu-api-app bash
 watch 'kubectl get pods|grep coderprabhu-api & kubectl top pods|grep coderprabhu-api' 
-watch 'kubectl logs coderprabhu-api-app-7cb66dd46b-4jfn4 --tail=150 | grep GC |grep heap'
+watch 'kubectl logs coderprabhu-api-app-6f458c588-tw929 --tail=150 | grep GC |grep heap'
+watch 'kubectl get pods & kubectl top pods'
+ab -n 10 -c 2 https://api.coderprabhu.com/count
+jps
+jmap -histo 80272 | head
+jmap -clstats 80272 
 ````   

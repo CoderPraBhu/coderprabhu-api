@@ -44,7 +44,8 @@ spec:
                 -Xlog:gc*=debug
                 -Xms30m
                 -Xmx40m
-                -XX:MaxRAM=170M
+                -Xss256k
+                -XX:MaxRAM=160M
                 -XX:+PrintFlagsFinal
         livenessProbe:
           httpGet:

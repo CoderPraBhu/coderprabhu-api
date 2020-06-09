@@ -39,13 +39,13 @@ spec:
           value: "10"  
         - name: JAVA_OPTS
           value: >-
-                -XX:ReservedCodeCacheSize=60M
+                -XX:ReservedCodeCacheSize=40M
                 -XX:MaxMetaspaceSize=60M
                 -Xlog:gc*=debug
                 -Xms30m
                 -Xmx40m
                 -Xss256k
-                -XX:MaxRAM=160M
+                -XX:MaxRAM=150M
                 -XX:+PrintFlagsFinal
         livenessProbe:
           httpGet:

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: coderprabhu-api-app
-        image: gcr.io/kubegcp-256806/coderprabhu-api:0.0.9-SNAPSHOT
+        image: gcr.io/kubegcp-256806/coderprabhu-api:0.0.10-SNAPSHOT
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -41,21 +41,20 @@ spec:
           value: >-
                 -XX:ReservedCodeCacheSize=40M
                 -XX:MaxMetaspaceSize=60M
-                -Xlog:gc*=debug
-                -Xms30m
+                -Xlog:gc
+                -Xms34m
                 -Xmx40m
                 -Xss256k
                 -XX:MaxRAM=150M
-                -XX:+PrintFlagsFinal
         livenessProbe:
           httpGet:
             port: 8080
-            path: /actuator/info
+            path: /actuator/health/liveness
           initialDelaySeconds: 50
           periodSeconds: 10
         readinessProbe:
           httpGet:
             port: 8080
-            path: /actuator/health
+            path: /actuator/health/readiness
           initialDelaySeconds: 60
           periodSeconds: 10

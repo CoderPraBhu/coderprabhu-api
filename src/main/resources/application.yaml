@@ -15,3 +15,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/CoderPraBhuApi
+management:
+  health:
+    probes:
+      enabled: true

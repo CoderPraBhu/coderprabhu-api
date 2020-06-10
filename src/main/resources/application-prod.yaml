@@ -9,3 +9,7 @@ spring:
       uri: mongodb://mongo-0.mongo/CoderPraBhuApi
   main:
     banner-mode: "off"
+management:
+  health:
+    probes:
+      enabled: true

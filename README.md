@@ -19,7 +19,7 @@ After making any changes, choose version in build.gradle, update docker push com
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.10-SNAPSHOT
+docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.11-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
@@ -37,7 +37,7 @@ curl http://localhost:8080
 docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
 docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -e "BPL_JVM_THREAD_COUNT=20" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
 
-docker run -p 8080:8080 -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.10-SNAPSHOT 
+docker run -p 8080:8080 -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.11-SNAPSHOT 
 docker run -p 8080:8080 --env JAVA_OPTS="-Xmx300m -Xms200m" -t gcr.io/projectname/appname:0.0.1-SNAPSHOT 
 docker run -p 8080:8080 --env JAVA_OPTS="-Xmx300m -XX:ReservedCodeCacheSize=100M -XX:MaxMetaspaceSize=80M" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
 
@@ -72,6 +72,7 @@ curl -I localhost:8080/actuator/health/liveness
 ````   
 # more commands:   
 ````
+kubectl exec -it coderprabhu-api-app-77477b6fbb-n8xmr bash
 kubectl exec -it coderprabhu-api-app-6f458c588-tw929 -c coderprabhu-api-app bash
 watch 'kubectl get pods|grep coderprabhu-api & kubectl top pods|grep coderprabhu-api' 
 watch 'kubectl logs coderprabhu-api-app-6f458c588-tw929 --tail=150 | grep GC |grep heap'

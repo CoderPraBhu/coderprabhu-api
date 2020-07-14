@@ -77,8 +77,17 @@ kubectl exec -it coderprabhu-api-app-6f458c588-tw929 -c coderprabhu-api-app bash
 watch 'kubectl get pods|grep coderprabhu-api & kubectl top pods|grep coderprabhu-api' 
 watch 'kubectl logs coderprabhu-api-app-6f458c588-tw929 --tail=150 | grep GC |grep heap'
 watch 'kubectl get pods & kubectl top pods'
+watch 'kubectl logs coderprabhu-api-app-5dd8b9d9cf-dk5ff --tail=60 | grep -v gc'
+watch 'kubectl describe pod coderprabhu-api-app-5dd8b9d9cf-dk5ff | grep kubelet'
+watch -n 2 'kubectl logs coderprabhu-api-app-57c6bb7f-szph8 --tail=30 | grep gc | wc'
 ab -n 100 -c 2 https://api.coderprabhu.com/count
 ab -n 100 -c 2 http://localhost:8080/count
+ ab -n 5000 -c 2 https://api.coderprabhu.com/hello
+ kubectl describe pod coderprabhu-api-app-789cbd7455-45hdk | tail -5
+ ab -n 3000 -c 5 https://api.coderprabhu.com/visit
+ ab -n 2000 -c 6 https://api.coderprabhu.com/count
+ ab -n 2000 -c 6 https://api.coderprabhu.com/count
+
 jps
 jmap -histo 80272 | head
 jmap -clstats 80272 

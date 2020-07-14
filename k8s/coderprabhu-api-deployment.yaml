@@ -27,8 +27,8 @@ spec:
             cpu: "0.02"
             memory: "150Mi"
           limits:
-            cpu: "1.0"  
-            memory: "256Mi" 
+            cpu: "0.6"  
+            memory: "194Mi" 
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "prod"    
@@ -40,22 +40,24 @@ spec:
           value: "10"  
         - name: JAVA_OPTS
           value: >-
-                -XX:ReservedCodeCacheSize=60M
+                -XX:ReservedCodeCacheSize=40M
                 -XX:MaxMetaspaceSize=60M
                 -Xlog:gc
-                -Xms80m
-                -Xmx90m
+                -Xms45m
+                -Xmx50m
                 -Xss256k
-                -XX:MaxRAM=232M
+                -XX:MaxRAM=170M
         livenessProbe:
           httpGet:
             port: 8080
             path: /actuator/health/liveness
           initialDelaySeconds: 40
           periodSeconds: 10
+          timeoutSeconds: 5
         readinessProbe:
           httpGet:
             port: 8080
             path: /actuator/health/readiness
           initialDelaySeconds: 60
           periodSeconds: 10
+          timeoutSeconds: 5

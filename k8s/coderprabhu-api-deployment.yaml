@@ -25,37 +25,37 @@ spec:
         resources:
           requests:
             cpu: "0.02"
-            memory: "64Mi"
+            memory: "150Mi"
           limits:
-            cpu: "0.4"  
-            memory: "190Mi" 
+            cpu: "1.0"  
+            memory: "256Mi" 
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "prod"    
         - name: BPL_JVM_HEAD_ROOM
-          value: "2"  
+          value: "10"  
         - name: BPL_JVM_LOADED_CLASS_COUNT
           value: "35"  
         - name: BPL_JVM_THREAD_COUNT
           value: "10"  
         - name: JAVA_OPTS
           value: >-
-                -XX:ReservedCodeCacheSize=40M
+                -XX:ReservedCodeCacheSize=60M
                 -XX:MaxMetaspaceSize=60M
                 -Xlog:gc
-                -Xms45m
-                -Xmx55m
+                -Xms80m
+                -Xmx90m
                 -Xss256k
-                -XX:MaxRAM=170M
+                -XX:MaxRAM=232M
         livenessProbe:
           httpGet:
             port: 8080
             path: /actuator/health/liveness
-          initialDelaySeconds: 140
+          initialDelaySeconds: 40
           periodSeconds: 10
         readinessProbe:
           httpGet:
             port: 8080
             path: /actuator/health/readiness
-          initialDelaySeconds: 160
+          initialDelaySeconds: 60
           periodSeconds: 10

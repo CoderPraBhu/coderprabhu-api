@@ -5,6 +5,7 @@ metadata:
   labels:
     app: coderprabhu-api
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: coderprabhu-api
@@ -26,7 +27,7 @@ spec:
             cpu: "0.02"
             memory: "64Mi"
           limits:
-            cpu: "0.3"  
+            cpu: "0.4"  
             memory: "190Mi" 
         env:
         - name: SPRING_PROFILES_ACTIVE
@@ -42,19 +43,19 @@ spec:
                 -XX:ReservedCodeCacheSize=40M
                 -XX:MaxMetaspaceSize=60M
                 -Xlog:gc
-                -Xms36m
-                -Xmx40m
+                -Xms45m
+                -Xmx55m
                 -Xss256k
-                -XX:MaxRAM=150M
+                -XX:MaxRAM=170M
         livenessProbe:
           httpGet:
             port: 8080
             path: /actuator/health/liveness
-          initialDelaySeconds: 50
+          initialDelaySeconds: 140
           periodSeconds: 10
         readinessProbe:
           httpGet:
             port: 8080
             path: /actuator/health/readiness
-          initialDelaySeconds: 60
+          initialDelaySeconds: 160
           periodSeconds: 10

@@ -18,10 +18,14 @@ spec:
     spec:
       containers:
       - name: coderprabhu-api-app
-        image: gcr.io/kubegcp-256806/coderprabhu-api:0.0.11-SNAPSHOT
+        image: gcr.io/kubegcp-256806/coderprabhu-api:0.0.12-SNAPSHOT
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sh","-c","sleep 5"]
         resources:
           requests:
             cpu: "0.02"
@@ -47,6 +51,9 @@ spec:
                 -Xmx50m
                 -Xss256k
                 -XX:MaxRAM=170M
+        envFrom:
+          - configMapRef:
+               name: log-level
         livenessProbe:
           httpGet:
             port: 8080

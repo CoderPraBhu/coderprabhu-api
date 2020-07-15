@@ -3,12 +3,15 @@ server:
   tomcat:
     threads:
       max: 2
+  shutdown: graceful
 spring:
   data:
     mongodb:
       uri: mongodb://mongo-0.mongo/CoderPraBhuApi
   main:
     banner-mode: "off"
+  lifecycle:
+    timeout-per-shutdown-phase: 5s
 management:
   health:
     probes:

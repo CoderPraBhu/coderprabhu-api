@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.coderprabhu'
-version = '0.0.11-SNAPSHOT'
+version = '0.0.12-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
@@ -37,7 +37,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.github.ua-parser:uap-java:1.4.0'	
 	compileOnly 'org.projectlombok:lombok'
-//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -86,7 +86,7 @@ bootBuildImage {
 	imageName = "gcr.io/kubegcp-256806/coderprabhu-api:${project.version}"
 	environment = [
 			// "BP_JVM_VERSION" : "13.0.1",
-			"BPL_JVM_HEAD_ROOM" : "2",
+			"BPL_JVM_HEAD_ROOM" : "10",
 			"BPL_JVM_LOADED_CLASS_COUNT" : "35",
 			"BPL_JVM_THREAD_COUNT" : "10"
 		]

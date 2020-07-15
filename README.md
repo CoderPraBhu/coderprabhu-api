@@ -19,7 +19,7 @@ After making any changes, choose version in build.gradle, update docker push com
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.11-SNAPSHOT
+docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.12-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
@@ -92,3 +92,14 @@ jps
 jmap -histo 80272 | head
 jmap -clstats 80272 
 ````   
+
+#Config Map for log level
+```
+kubectl create configmap log-level --from-literal=LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=DEBUG
+kubectl get configmap log-level -o yaml
+kubectl scale deployment coderprabhu-api-app --replicas=0 
+kubectl scale deployment coderprabhu-api-app --replicas=1
+kubectl create configmap log-level --from-literal=LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=INFO -o yaml --dry-run | kubectl replace -f -
+kubectl create configmap log-level --from-literal=LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=DEBUG -o yaml --dry-run | kubectl replace -f -
+
+```

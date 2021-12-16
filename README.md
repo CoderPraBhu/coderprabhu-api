@@ -13,18 +13,14 @@ Execute to build the image and push it:
 ./gradlew jibDockerBuild --image=gcr.io/kubegcp-256806/coderprabhu-api:v23
 docker push gcr.io/kubegcp-256806/coderprabhu-api:v23
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml 
-kubectl apply -f k8s/coderprabhu-api-backend-service.yaml 
 ```
 ## Spring boot image build:
 After making any changes, choose version in build.gradle, update docker push command and update deployment yaml.
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.13-SNAPSHOT
+docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.14-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
-
-kubectl delete -f k8s/coderprabhu-api-deployment.yaml
-
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
 Google Container registry authentication: 
@@ -36,7 +32,7 @@ less $HOME/.docker/config.json
 ```
 You can run the image locally using
 ````
-docker run -p 8080:8080 -t gcr.io/all-projects-292200/coderprabhu-api:v13
+docker run -p 8080:8080 -t gcr.io/kubegcp-256806/coderprabhu-api:v9 
 curl http://localhost:8080
 docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
 docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -e "BPL_JVM_THREAD_COUNT=20" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
@@ -76,6 +72,7 @@ curl -I localhost:8080/actuator/health/liveness
 ````   
 # more commands:   
 ````
+gcloud container images list
 kubectl exec -it coderprabhu-api-app-77477b6fbb-n8xmr bash
 kubectl exec -it coderprabhu-api-app-6f458c588-tw929 -c coderprabhu-api-app bash
 watch 'kubectl get pods|grep coderprabhu-api & kubectl top pods|grep coderprabhu-api' 

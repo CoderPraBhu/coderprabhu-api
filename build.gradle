@@ -1,13 +1,13 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'com.google.cloud.tools.jib' version '2.4.0'
+	id 'org.springframework.boot' version '2.6.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'com.google.cloud.tools.jib' version '3.1.4'
 	id 'java'
 }
 
 group = 'com.coderprabhu'
-version = '0.0.13-SNAPSHOT'
-sourceCompatibility = '11'
+version = '0.0.14-SNAPSHOT'
+sourceCompatibility = '17'
 
 configurations {
 	developmentOnly
@@ -25,7 +25,7 @@ repositories {
 }
 
 ext {
-  set('wavefrontVersion', "2.0.0-RC1")
+  set('wavefrontVersion', "2.2.2")
 }
 
 dependencies {
@@ -54,7 +54,8 @@ dependencyManagement {
 test {
 	useJUnitPlatform()
 }
-
+// Jib will use java 17 base image from Jib version 3.2. 
+// https://github.com/GoogleContainerTools/jib/issues/3483
 jib {
 //   from {
 //     image = 'openjdk:alpine'
@@ -81,7 +82,6 @@ bootRun {
         args project.args.split(',')
     }
 }
-
 bootBuildImage {
 	imageName = "gcr.io/all-projects-292200/coderprabhu-api:${project.version}"
 	environment = [

@@ -13,14 +13,18 @@ Execute to build the image and push it:
 ./gradlew jibDockerBuild --image=gcr.io/kubegcp-256806/coderprabhu-api:v23
 docker push gcr.io/kubegcp-256806/coderprabhu-api:v23
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml 
+kubectl apply -f k8s/coderprabhu-api-backend-service.yaml 
 ```
 ## Spring boot image build:
 After making any changes, choose version in build.gradle, update docker push command and update deployment yaml.
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/kubegcp-256806/coderprabhu-api:0.0.12-SNAPSHOT
+docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.13-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
+
+kubectl delete -f k8s/coderprabhu-api-deployment.yaml
+
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
 Google Container registry authentication: 
@@ -32,7 +36,7 @@ less $HOME/.docker/config.json
 ```
 You can run the image locally using
 ````
-docker run -p 8080:8080 -t gcr.io/kubegcp-256806/coderprabhu-api:v9 
+docker run -p 8080:8080 -t gcr.io/all-projects-292200/coderprabhu-api:v13
 curl http://localhost:8080
 docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
 docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -e "BPL_JVM_THREAD_COUNT=20" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
@@ -95,7 +99,7 @@ jmap -clstats 80272
 
 #Config Map for log level
 ```
-kubectl create configmap log-level --from-literal=LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=DEBUG
+kubectl create configmap coderprabhu-api-log-level --from-literal=LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=DEBUG
 kubectl get configmap log-level -o yaml
 kubectl scale deployment coderprabhu-api-app --replicas=0 
 kubectl scale deployment coderprabhu-api-app --replicas=1
@@ -103,3 +107,7 @@ kubectl create configmap log-level --from-literal=LOGGING_LEVEL_ORG_SPRINGFRAMEW
 kubectl create configmap log-level --from-literal=LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=DEBUG -o yaml --dry-run | kubectl replace -f -
 
 ```
+
+kubectl apply -f k8s/coderprabhu-api-dot-com-cert.yaml
+kubectl describe -f k8s/coderprabhu-api-dot-com-cert.yaml
+kubectl delete -f k8s/coderprabhu-api-dot-com-cert.yaml

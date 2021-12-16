@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.coderprabhu'
-version = '0.0.12-SNAPSHOT'
+version = '0.0.13-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
@@ -83,7 +83,7 @@ bootRun {
 }
 
 bootBuildImage {
-	imageName = "gcr.io/kubegcp-256806/coderprabhu-api:${project.version}"
+	imageName = "gcr.io/all-projects-292200/coderprabhu-api:${project.version}"
 	environment = [
 			// "BP_JVM_VERSION" : "13.0.1",
 			"BPL_JVM_HEAD_ROOM" : "10",

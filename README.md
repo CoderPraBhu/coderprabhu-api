@@ -19,7 +19,8 @@ After making any changes, choose version in build.gradle, update docker push com
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.14-SNAPSHOT
+docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.15-SNAPSHOT
+docker run -p 8080:8080 -t gcr.io/all-projects-292200/coderprabhu-api:0.0.15-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
@@ -34,6 +35,7 @@ You can run the image locally using
 ````
 docker run -p 8080:8080 -t gcr.io/kubegcp-256806/coderprabhu-api:v9 
 curl http://localhost:8080
+docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -t gcr.io/all-projects-292200/coderprabhu-api:0.0.15-SNAPSHOT
 docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
 docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=prod" -e "BPL_JVM_THREAD_COUNT=20" -t gcr.io/kubegcp-256806/coderprabhu-api:0.0.6-SNAPSHOT 
 

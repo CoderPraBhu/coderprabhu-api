@@ -6,7 +6,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.coderprabhu.api.dao.VisitorRepository;
 import com.coderprabhu.api.dao.VisitorTemplate;

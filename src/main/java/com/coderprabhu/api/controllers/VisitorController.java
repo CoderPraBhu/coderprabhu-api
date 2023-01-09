@@ -1,9 +1,11 @@
 package com.coderprabhu.api.controllers;
 
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 
 import com.coderprabhu.api.data.Visitor;
 import com.coderprabhu.api.services.VisitorService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

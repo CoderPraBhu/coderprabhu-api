@@ -19,8 +19,10 @@ After making any changes, choose version in build.gradle, update docker push com
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.15-SNAPSHOT
-docker run -p 8080:8080 -t gcr.io/all-projects-292200/coderprabhu-api:0.0.15-SNAPSHOT
+docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.16-SNAPSHOT
+  Auth first: https://cloud.google.com/container-registry/docs/advanced-authentication
+  Run gcloud auth login
+docker run -p 8080:8080 -t gcr.io/all-projects-292200/coderprabhu-api:0.0.16-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  
@@ -77,10 +79,12 @@ curl -I localhost:8080/actuator/health/liveness
 gcloud container images list
 kubectl exec -it coderprabhu-api-app-77477b6fbb-n8xmr bash
 kubectl exec -it coderprabhu-api-app-6f458c588-tw929 -c coderprabhu-api-app bash
+kubectl logs coderprabhu-api-app-59ccbb7866-8hrbq
 watch 'kubectl get pods|grep coderprabhu-api & kubectl top pods|grep coderprabhu-api' 
 watch 'kubectl logs coderprabhu-api-app-6f458c588-tw929 --tail=150 | grep GC |grep heap'
 watch 'kubectl get pods & kubectl top pods'
-watch 'kubectl logs coderprabhu-api-app-5dd8b9d9cf-dk5ff --tail=60 | grep -v gc'
+watch 'kubectl logs coderprabhu-api-app-59ccbb7866-8hrbq --tail=60'
+watch 'kubectl logs coderprabhu-api-app-59ccbb7866-8hrbq --tail=60 | grep -v gc'
 watch 'kubectl describe pod coderprabhu-api-app-5dd8b9d9cf-dk5ff | grep kubelet'
 watch -n 2 'kubectl logs coderprabhu-api-app-57c6bb7f-szph8 --tail=30 | grep gc | wc'
 ab -n 100 -c 2 https://api.coderprabhu.com/count

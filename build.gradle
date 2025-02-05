@@ -1,13 +1,13 @@
 plugins {
-	id 'org.springframework.boot' version '3.0.1'
-	id 'io.spring.dependency-management' version '1.1.0'
-	id 'com.google.cloud.tools.jib' version '3.2.0'
+	id 'org.springframework.boot' version '3.4.2'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'com.google.cloud.tools.jib' version '3.4.4'
 	id 'java'
 }
 
 group = 'com.coderprabhu'
-version = '0.0.15-SNAPSHOT'
-sourceCompatibility = '19'
+version = '0.0.16-SNAPSHOT'
+sourceCompatibility = '21'
 
 configurations {
 	developmentOnly
@@ -36,7 +36,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'jakarta.platform:jakarta.jakartaee-web-api:10.0.0'
-	implementation 'com.github.ua-parser:uap-java:1.4.0'	
+	implementation 'com.github.ua-parser:uap-java:1.6.1'	
 	compileOnly 'org.projectlombok:lombok'
 	//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'

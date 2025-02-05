@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: coderprabhu-api-app
-        image: gcr.io/all-projects-292200/coderprabhu-api:0.0.15-SNAPSHOT
+        image: gcr.io/all-projects-292200/coderprabhu-api:0.0.16-SNAPSHOT
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

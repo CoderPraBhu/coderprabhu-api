@@ -32,7 +32,7 @@ spec:
             memory: "150Mi"
           limits:
             cpu: "0.6"  
-            memory: "194Mi" 
+            memory: "244Mi" 
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "prod"    
@@ -60,11 +60,11 @@ spec:
             path: /actuator/health/liveness
           initialDelaySeconds: 40
           periodSeconds: 10
-          timeoutSeconds: 5
+          timeoutSeconds: 15
         readinessProbe:
           httpGet:
             port: 8080
             path: /actuator/health/readiness
           initialDelaySeconds: 60
           periodSeconds: 10
-          timeoutSeconds: 5
+          timeoutSeconds: 15

@@ -6,8 +6,11 @@ plugins {
 }
 
 group = 'com.coderprabhu'
-version = '0.0.16-SNAPSHOT'
-sourceCompatibility = '21'
+version = '0.0.17-SNAPSHOT'
+
+java {
+	sourceCompatibility = '21'
+}
 
 configurations {
 	developmentOnly

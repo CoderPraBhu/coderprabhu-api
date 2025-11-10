@@ -19,10 +19,10 @@ After making any changes, choose version in build.gradle, update docker push com
 Execute to build the image and push it:  
 ```
 ./gradlew bootBuildImage
-docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.16-SNAPSHOT
+docker push gcr.io/all-projects-292200/coderprabhu-api:0.0.17-SNAPSHOT
   Auth first: https://cloud.google.com/container-registry/docs/advanced-authentication
   Run gcloud auth login
-docker run -p 8080:8080 -t gcr.io/all-projects-292200/coderprabhu-api:0.0.16-SNAPSHOT
+docker run -p 8080:8080 -t gcr.io/all-projects-292200/coderprabhu-api:0.0.17-SNAPSHOT
 kubectl apply -f k8s/coderprabhu-api-deployment.yaml
 ````
 Docker Reference: https://spring.io/guides/topicals/spring-boot-docker  

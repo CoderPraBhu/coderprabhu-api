@@ -64,11 +64,10 @@ jib {
 //   from {
 //     image = 'openjdk:alpine'
 //   }
-//   to {
-//     image = 'localhost:5000/my-image/built-with-jib'
-//     credHelper = 'osxkeychain'
-//     tags = ['tag2', 'latest']
-//   }
+  to {
+    image = "gcr.io/all-projects-292200/coderprabhu-api:${project.version}"
+    credHelper = 'gcloud'
+  }
   container {
     // jvmFlags = ['-Xms100m', '÷-Xmx120m']
     jvmFlags = ['-XX:MaxRAMPercentage=75.0','-XX:+UseSerialGC','-Xss512k']

@@ -7,7 +7,8 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo-0.mongo/CoderPraBhuApi
+#      uri: mongodb://mongo-0.mongo/CoderPraBhuApi    
+      uri: mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_HOST}/${MONGODB_DB_NAME}?${MONGODB_OPTIONS}
   main:
     banner-mode: "off"
   lifecycle:

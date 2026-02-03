@@ -51,6 +51,33 @@ spec:
                 -Xmx50m
                 -Xss256k
                 -XX:MaxRAM=170M
+        # From Secret
+        - name: MONGODB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-atlas-secret
+              key: MONGODB_USER
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-atlas-secret
+              key: MONGODB_PASSWORD
+        # From ConfigMap
+        - name: MONGODB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mongodb-atlas-config
+              key: MONGODB_HOST
+        - name: MONGODB_OPTIONS
+          valueFrom:
+            configMapKeyRef:
+              name: mongodb-atlas-config
+              key: MONGODB_OPTIONS
+        - name: MONGODB_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: mongodb-atlas-config
+              key: CODERPRABHU_DB_NAME  # Change per app
         envFrom:
           - configMapRef:
                name: coderprabhu-api-log-level

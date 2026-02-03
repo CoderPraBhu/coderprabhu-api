@@ -22,12 +22,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     
     @Override
     protected void configureClientSettings(Builder builder) {
-        builder
-        .applyToClusterSettings(settings  -> {
-            settings.applyConnectionString(new ConnectionString(connectionString));
-        });
-        // settings.hosts(Collections.singletonList(new ServerAddress("127.0.0.1", 27017)));
-        // .credential(MongoCredential.createCredential("", "", "".toCharArray()))
+        builder.applyConnectionString(new ConnectionString(connectionString));
     }
 
     @Override

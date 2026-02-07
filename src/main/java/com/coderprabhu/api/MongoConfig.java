@@ -22,7 +22,28 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     
     @Override
     protected void configureClientSettings(Builder builder) {
-        builder.applyConnectionString(new ConnectionString(connectionString));
+        builder.applyConnectionString(resolveConnectionStringWithRetry());
+    }
+
+    private ConnectionString resolveConnectionStringWithRetry() {
+        int maxRetries = 3;
+        long delayMs = 5000;
+        for (int attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+                return new ConnectionString(connectionString);
+            } catch (Exception e) {
+                if (attempt == maxRetries) {
+                    throw e;
+                }
+                try {
+                    Thread.sleep(delayMs * attempt);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    throw e;
+                }
+            }
+        }
+        return new ConnectionString(connectionString);
     }
 
     @Override

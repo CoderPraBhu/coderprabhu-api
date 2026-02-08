@@ -70,7 +70,7 @@ jib {
   }
   container {
     // jvmFlags = ['-Xms100m', '÷-Xmx120m']
-    jvmFlags = ['-XX:MaxRAMPercentage=75.0','-XX:+UseSerialGC','-Xss512k']
+    jvmFlags = []
     // jvmFlags = ['-Xms512m', '-Xdebug', '-Xmy:flag=jib-rules']
     // mainClass = 'mypackage.MyApp'
     // args = ['some', 'args']

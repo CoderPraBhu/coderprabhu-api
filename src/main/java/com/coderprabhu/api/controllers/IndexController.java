@@ -19,6 +19,6 @@ public class IndexController {
     @GetMapping(value="/hello")
     @CrossOrigin(origins = "*")
     public String hello() {
-        return "Hello!";
+        return "Build. Ship. Repeat.";
     }
 }

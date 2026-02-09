@@ -1,30 +1,27 @@
 steps:
-# Step 1: Configure Docker to use gcloud as a credential helper
-# This step uses the gcloud builder to run 'gcloud auth configure-docker'.
-# The Docker configuration is written to a shared volume.
+# Step 1: Generate access token and write Docker config for GCR
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
-    gcloud auth configure-docker
+    TOKEN=$(gcloud auth print-access-token)
+    echo "{\"auths\":{\"gcr.io\":{\"auth\":\"$(echo -n "oauth2accesstoken:$$TOKEN" | base64)\"}}}" > /docker-config/config.json
   volumes:
   - name: 'docker-config'
-    path: '/root/.docker' # Standard location for Docker config
+    path: '/docker-config'
 
-# Step 2: Run your Gradle build with Jib
-# This step uses the gradle builder and mounts the same shared volume.
-# Jib will then find the configured Docker credentials in the mounted volume.
-- name: 'gradle:8-jdk21' # Or your preferred Gradle/JDK version
+# Step 2: Run Gradle build with Jib using the token-based Docker config
+- name: 'gradle:8-jdk21'
   entrypoint: 'gradle'
   args: ['clean', 'jib']
+  env:
+  - 'DOCKER_CONFIG=/docker-config'
   volumes:
   - name: 'docker-config'
-    path: '/root/.docker' # Mount the same volume here
-  # If your project requires a specific JAVA_HOME, you might need to set it here
-  # env: ['JAVA_HOME=/usr/lib/jvm/java-17-openjdk'] # Example, check your gradle image for correct path
+    path: '/docker-config'
 
-# Step 3: Apply Kubernetes manifests from a folder to your GKE cluster
+# Step 3: Apply Kubernetes manifests to GKE cluster
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'k8s/']
   env:

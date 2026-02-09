@@ -50,8 +50,8 @@ public class VisitorService {
 		return visitor;
     }
     
-    public Integer getTotalVisits() {
-		return repository.findAll().size();
+    public long getTotalVisits() {
+		return repository.count();
     }
     
     public Integer getUniqueVisits() {

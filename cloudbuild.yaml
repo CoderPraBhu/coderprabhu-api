@@ -1,4 +1,4 @@
-gcloud steps:
+steps:
 # Step 1: Configure Docker to use gcloud as a credential helper
 # This step uses the gcloud builder to run 'gcloud auth configure-docker'.
 # The Docker configuration is written to a shared volume.

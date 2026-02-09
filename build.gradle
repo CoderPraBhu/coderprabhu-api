@@ -12,72 +12,33 @@ java {
 	sourceCompatibility = '21'
 }
 
-configurations {
-	developmentOnly
-	runtimeClasspath {
-		extendsFrom developmentOnly
-	}
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
-
 repositories {
 	mavenCentral()
-	maven { url 'https://repo.spring.io/milestone' }
-}
-
-ext {
-  set('wavefrontVersion', "2.2.2")
 }
 
 dependencies {
-//	implementation 'com.wavefront:wavefront-spring-boot-starter'
-//	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.2.2.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'jakarta.platform:jakarta.jakartaee-web-api:10.0.0'
-	implementation 'com.github.ua-parser:uap-java:1.6.1'	
+	implementation 'com.github.ua-parser:uap-java:1.6.1'
 	compileOnly 'org.projectlombok:lombok'
-	//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-}
-
-dependencyManagement {
-  imports {
-    mavenBom "com.wavefront:wavefront-spring-boot-bom:${wavefrontVersion}"
-  }
 }
 
 test {
 	useJUnitPlatform()
 }
-// Jib will use java 17 base image from Jib version 3.2. 
-// https://github.com/GoogleContainerTools/jib/issues/3483
+
 jib {
-//   from {
-//     image = 'openjdk:alpine'
-//   }
   to {
     image = "gcr.io/all-projects-292200/coderprabhu-api:latest"
-    credHelper = 'gcloud'
     tags = ['latest']
   }
   container {
-    // jvmFlags = ['-Xms100m', '÷-Xmx120m']
     jvmFlags = []
-    // jvmFlags = ['-Xms512m', '-Xdebug', '-Xmy:flag=jib-rules']
-    // mainClass = 'mypackage.MyApp'
-    // args = ['some', 'args']
-    // ports = ['1000', '2000-2003/udp']k
-    // labels = [key1:'value1', key2:'value2']
-    // format = 'OCI'
   }
 }
 
@@ -85,13 +46,4 @@ bootRun {
     if (project.hasProperty('args')) {
         args project.args.split(',')
     }
-}
-bootBuildImage {
-	imageName = "gcr.io/all-projects-292200/coderprabhu-api:latest"
-	environment = [
-			// "BP_JVM_VERSION" : "13.0.1",
-			"BPL_JVM_HEAD_ROOM" : "10",
-			"BPL_JVM_LOADED_CLASS_COUNT" : "35",
-			"BPL_JVM_THREAD_COUNT" : "10"
-		]
 }

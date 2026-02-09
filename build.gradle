@@ -67,6 +67,7 @@ jib {
   to {
     image = "gcr.io/all-projects-292200/coderprabhu-api:${project.version}"
     credHelper = 'gcloud'
+    tags = ['latest']
   }
   container {
     // jvmFlags = ['-Xms100m', '÷-Xmx120m']

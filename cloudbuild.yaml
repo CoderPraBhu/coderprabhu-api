@@ -25,5 +25,8 @@ steps:
   # env: ['JAVA_HOME=/usr/lib/jvm/java-17-openjdk'] # Example, check your gradle image for correct path
 
 # Step 3: Apply Kubernetes manifests from a folder to your GKE cluster
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['kubectl', 'apply', '-f', 'k8s/']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'k8s/']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-west1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=allprojects-cluster'

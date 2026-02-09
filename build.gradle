@@ -65,7 +65,7 @@ jib {
 //     image = 'openjdk:alpine'
 //   }
   to {
-    image = "gcr.io/all-projects-292200/coderprabhu-api:${project.version}"
+    image = "gcr.io/all-projects-292200/coderprabhu-api:latest"
     credHelper = 'gcloud'
     tags = ['latest']
   }

@@ -1,4 +1,4 @@
-steps:
+gcloud steps:
 # Step 1: Configure Docker to use gcloud as a credential helper
 # This step uses the gcloud builder to run 'gcloud auth configure-docker'.
 # The Docker configuration is written to a shared volume.
@@ -23,3 +23,7 @@ steps:
     path: '/root/.docker' # Mount the same volume here
   # If your project requires a specific JAVA_HOME, you might need to set it here
   # env: ['JAVA_HOME=/usr/lib/jvm/java-17-openjdk'] # Example, check your gradle image for correct path
+
+# Step 3: Apply Kubernetes manifests from a folder to your GKE cluster
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['kubectl', 'apply', '-f', 'k8s/']

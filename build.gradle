@@ -86,7 +86,7 @@ bootRun {
     }
 }
 bootBuildImage {
-	imageName = "gcr.io/all-projects-292200/coderprabhu-api:${project.version}"
+	imageName = "gcr.io/all-projects-292200/coderprabhu-api:latest"
 	environment = [
 			// "BP_JVM_VERSION" : "13.0.1",
 			"BPL_JVM_HEAD_ROOM" : "10",

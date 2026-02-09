@@ -35,6 +35,7 @@ test {
 jib {
   to {
     image = "gcr.io/all-projects-292200/coderprabhu-api:latest"
+    credHelper = 'gcloud'
     tags = ['latest']
   }
   container {

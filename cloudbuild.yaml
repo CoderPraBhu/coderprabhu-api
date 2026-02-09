@@ -1,0 +1,5 @@
+steps:
+  # Build and push container image using Jib
+  - name: 'gradle:8-jdk21'
+    entrypoint: 'gradle'
+    args: ['jib']

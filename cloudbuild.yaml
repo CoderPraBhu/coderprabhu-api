@@ -17,7 +17,7 @@ steps:
 # Jib will then find the configured Docker credentials in the mounted volume.
 - name: 'gradle:8-jdk21' # Or your preferred Gradle/JDK version
   entrypoint: 'gradle'
-  args: ['clean', 'jibBuild']
+  args: ['clean', 'jib']
   volumes:
   - name: 'docker-config'
     path: '/root/.docker' # Mount the same volume here

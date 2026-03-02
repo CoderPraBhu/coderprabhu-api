@@ -44,14 +44,14 @@ spec:
           value: "10"  
         - name: JAVA_TOOL_OPTIONS
           value: >-
-                -XX:ReservedCodeCacheSize=32M
+                -XX:ReservedCodeCacheSize=40M
                 -XX:MaxMetaspaceSize=65M
                 -Xlog:gc
-                -Xms40m
+                -Xms45m
                 -Xmx50m
                 -Xss256k
-                -XX:MaxRAM=160M
-                -XX:+UseSerialGC
+                -XX:MaxRAM=170M
+                -XX:TieredStopAtLevel=1
         # From Secret
         - name: MONGODB_USER
           valueFrom:

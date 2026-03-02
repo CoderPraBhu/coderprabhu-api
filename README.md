@@ -114,3 +114,8 @@ kubectl create configmap log-level --from-literal=LOGGING_LEVEL_ORG_SPRINGFRAMEW
 kubectl apply -f k8s/coderprabhu-api-dot-com-cert.yaml
 kubectl describe -f k8s/coderprabhu-api-dot-com-cert.yaml
 kubectl delete -f k8s/coderprabhu-api-dot-com-cert.yaml
+
+
+```
+gcloud builds submit --config cloudbuild.yaml . --region=us-west1
+```

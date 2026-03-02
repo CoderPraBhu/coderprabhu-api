@@ -32,7 +32,7 @@ spec:
             memory: "150Mi"
           limits:
             cpu: "0.6"  
-            memory: "244Mi" 
+            memory: "250Mi" 
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "prod"    
@@ -44,11 +44,11 @@ spec:
           value: "10"  
         - name: JAVA_TOOL_OPTIONS
           value: >-
-                -XX:ReservedCodeCacheSize=24M
+                -XX:ReservedCodeCacheSize=32M
                 -XX:MaxMetaspaceSize=65M
                 -Xlog:gc
                 -Xms40m
-                -Xmx40m
+                -Xmx50m
                 -Xss256k
                 -XX:MaxRAM=160M
                 -XX:+UseSerialGC

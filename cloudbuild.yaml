@@ -26,4 +26,4 @@ steps:
   args: ['apply', '-f', 'k8s/']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-west1-b'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=allprojects-cluster'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=allprojects-v2'

@@ -1,35 +1,27 @@
 
 package com.coderprabhu.api.controllers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.resttestclient.TestRestTemplate;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.web.servlet.client.RestTestClient;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureTestRestTemplate
+@AutoConfigureRestTestClient
 @DirtiesContext
 public class IndexControllerTests {
 
-	@LocalServerPort
-	private int port;
-
 	@Autowired
-	private TestRestTemplate restTemplate;
+	private RestTestClient restTestClient;
 
 	@Test
 	public void testGreeting() throws Exception {
-		ResponseEntity<String> entity = restTemplate
-				.getForEntity("http://localhost:" + this.port + "/hello", String.class);
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
+		restTestClient.get().uri("/hello")
+				.exchange()
+				.expectStatus().isOk();
 	}
 
 }
